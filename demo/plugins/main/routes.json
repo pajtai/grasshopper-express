@@ -1,0 +1,17 @@
+[
+    [
+        "use",
+        "/",
+        [
+            "components/head/head.middleware"
+        ]
+    ],
+
+    [
+        "GET",
+        "/",
+        [
+            "templates/render.home.template"
+        ]
+    ]
+]

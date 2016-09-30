@@ -3,6 +3,7 @@
 const adminIndex = require.resolve('./public/admin/index.html');
 const BB = require('bluebird');
 const chalk = require('chalk');
+const createRoutes = require('express-json-middleware');
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
@@ -10,9 +11,12 @@ const path = require('path');
 const grasshopperService = require('./services/grasshopper.service');
 
 
-module.exports = {
-    start: start
+var grexpo = {
+    start: start,
+    services: null
 };
+
+module.exports = grexpo;
 
 /**
  *
@@ -37,6 +41,10 @@ function start(options) {
     options.protocol = options.protocol || 'http';
     options.staticOptions = options.staticOptions || { maxage : '365d' };
 
+    grexpo.services = options.services || {};
+
+    options.app.set('view engine', 'pug');
+
     return BB
         .bind({
             authenticatedRequest: null,
@@ -46,6 +54,7 @@ function start(options) {
         .then(startGrasshopper)
         .then(serveStaticAdmin)
         .then(serveGrasshopperApi)
+        .then(loadPlugins)
         .then(startServer)
         .then(function(server) {
             return {
@@ -67,6 +76,9 @@ function startGrasshopper() {
         .then(function(serviceResponse) {
             this.authenticatedRequest = serviceResponse.authenticatedRequest;
             this.grasshopper = serviceResponse.grasshopper;
+
+            grexpo.services.authenticatedRequest = this.authenticatedRequest;
+            grexpo.services.grasshopper = this.grasshopper;
         });
 }
 
@@ -80,6 +92,35 @@ function serveStaticAdmin() {
 
 function serveGrasshopperApi() {
     this.options.app.use('/api', this.grasshopper.router);
+}
+
+function loadPlugins() {
+    const baseDirectory = this.options.baseDirectory;
+    const plugins = require(path.join(baseDirectory, 'plugins.json'));
+
+    plugins.forEach(plugin => {
+        const pluginPath = path.join(baseDirectory, plugin.path);
+        const index = require(pluginPath);
+        if (index) {
+            // TODO: wait if a promise is returned
+            index();
+        }
+        loadRoutesForPlugin.call(this, pluginPath);
+    });
+}
+
+function loadRoutesForPlugin(pluginPath) {
+    const routesFilePath = path.join(pluginPath, 'routes.json');
+    const routes = require(routesFilePath);
+
+    console.log(chalk.green('> routes file:'), routesFilePath);
+
+    createRoutes({
+        app : this.options.app,
+        express : this.options.express,
+        routes : routes,
+        middlewares : pluginPath
+    });
 }
 
 function startServer() {

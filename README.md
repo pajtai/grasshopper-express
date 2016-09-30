@@ -12,9 +12,9 @@ Please use Node 6+
 
 Each SPA is called a Chapter.
 
-A Chapter is made up of multiple Pages. Pages are loaded into Chapters
-dynamically. Going from one Chapter to another triggers a page refresh.
-Going from one Page to another within the same Chapter does not trigger
+A Plugin is made up of multiple Pages. Pages are loaded into Plugins
+dynamically. Going from one Plugin to another triggers a page refresh.
+Going from one Page to another within the same Plugin does not trigger
 a page refresh. 
 
 A Page is essentially a separate node app
@@ -39,32 +39,39 @@ independently.
                 staging.json
                 production.json
             index.js
-        chapters    
-            sampleChapter
-                samplePage
-                    api
-                        sample
-                            sample.get.js
-                            sample.get.spec.js
-                            sample.model.js
-                    assets
-                        bower_components
-                        images
-                        src
-                            sample-view.html
-                        index.html (can also render index.pug)
-                    bin
-                        start
-                        watch
-                    middlewares
-                    services
-                        sample.service.js
-                        sample.service.spec.js
-                    bower.json
-                    index.js
-                    package.json
-                    routes.json
+        plugins    
+            samplePlugin
+                api
+                    sample
+                        sample.get.js
+                        sample.get.spec.js
+                        sample.model.js
+                assets
+                    bower_components
+                    images
+                    pages
+                        home-page.html
+                        about-page.html
+                    fragments
+                        banner-fragment.html
+                        footer-fragment.html
+                    views
+                        button-view.html
+                        table-view.html
+                bin
+                    start
+                    watch
+                middlewares
+                services
+                    sample.service.js
+                    sample.service.spec.js
+                bower.json
+                index.pug
+                index.js
+                package.json
+                routes.json
         index.js
+        plugins.json
         
 ## Files and directories
 
@@ -82,6 +89,8 @@ Call `grexpo.start` from with the following options:
     baseDirectory: __dirname,
     verbose: true,
     grasshopper: grasshopper,
+    grasshopperAdminPassword: '...',
+    grasshopperAdminUsername: '...',
     longStackTraces: true,
     staticOptions: { maxage : '30d' },
     protocol: 'http',
@@ -103,10 +112,10 @@ use the data returned to build your configs with ES6 template strings.
 The return configs should include a `grasshopper` key with a value of a 
 Grasshopper configuration object.
 
-
-
 ## Roadmap
 
+What for plugin/index.js if it returns a promise.
+Make plugins.json optionally come from a db
 Include ways to use sass and jade with Polymer.
 Include ways to use jade on server side.
 Include migrations.

@@ -19,8 +19,10 @@
   "homepage": "https://github.com/pajtai/grexpo#readme",
   "dependencies": {
     "bluebird": "^3.4.6",
+    "chalk": "^1.1.3",
     "express": "^4.14.0",
     "grasshopper-admin": "^0.40.3-no-minification",
+    "grasshopper-api": "^0.18.15",
     "lodash": "^4.16.2",
     "solid-logger-js": "^1.2.0"
   }

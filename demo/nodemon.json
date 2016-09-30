@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": [
+        ".git",
+        ".idea",
+        ".vagrant",
+        "node_modules"
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "apiEndpoint": "/api",
+    "buildDirectory": "public/admin",
+    "base": "/admin/",
+    "homeString": "Grasshopper"
+}

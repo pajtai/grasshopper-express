@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/pajtai/grexpo/issues"
   },
-  "homepage": "https://github.com/pajtai/grexpo#readme"
+  "homepage": "https://github.com/pajtai/grexpo#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "express": "^4.14.0",
+    "grasshopper-admin": "^0.40.3-no-minification",
+    "lodash": "^4.16.2",
+    "solid-logger-js": "^1.2.0"
+  }
 }

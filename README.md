@@ -6,6 +6,8 @@ front and back end are included.
 
 grexpo can be used to build a SPA (single page app) or multiple SPAs.
 
+Please use Node 6+
+
 ## Nomenclature
 
 Each SPA is called a Chapter.
@@ -41,16 +43,70 @@ independently.
             sampleChapter
                 samplePage
                     api
+                        sample
+                            sample.get.js
+                            sample.get.spec.js
+                            sample.model.js
                     assets
                         bower_components
-                        index.html
+                        images
+                        src
+                            sample-view.html
+                        index.html (can also render index.pug)
                     bin
                         start
                         watch
+                    middlewares
                     services
+                        sample.service.js
+                        sample.service.spec.js
                     bower.json
                     index.js
                     package.json
                     routes.json
+        index.js
         
+## Files and directories
 
+### `/index.js`
+
+You should call `config` first, and use the configs to build the start
+options for grexpo.
+
+Call `grexpo.start` from with the following options:
+
+```
+{
+    express: express,
+    app: app,
+    baseDirectory: __dirname,
+    verbose: true,
+    grasshopper: grasshopper,
+    longStackTraces: true,
+    staticOptions: { maxage : '30d' },
+    protocol: 'http',
+    https: {
+        key: key,
+        cert: cert
+    }
+    
+    configs: configs, // global configs available as `require('grexpo').configs
+    services: services // global services available as `require('grexpo').services
+}
+```
+
+### `/configs/index.js`
+
+Suggested usage is to use NODE_ENV to conditionally require `./var/NODE_ENV` and
+use the data returned to build your configs with ES6 template strings.
+
+The return configs should include a `grasshopper` key with a value of a 
+Grasshopper configuration object.
+
+
+
+## Roadmap
+
+Include ways to use sass and jade with Polymer.
+Include ways to use jade on server side.
+Include migrations.

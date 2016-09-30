@@ -1,6 +1,6 @@
 'use strict';
 
-const adminIndex = require.resolve('./public/admin/index.html');
+const adminIndex = require.resolve('./assets/admin/index.html');
 const BB = require('bluebird');
 const chalk = require('chalk');
 const createRoutes = require('express-json-middleware');
@@ -86,7 +86,7 @@ function serveStaticAdmin() {
     const app = this.options.app;
 
     console.log(chalk.green('> serving static admin'));
-    app.use(this.options.express.static(path.join(__dirname, 'public'), this.options.staticOptions));
+    app.use(this.options.express.static(path.join(__dirname, 'assets'), this.options.staticOptions));
     app.use('/admin', function(req, res) { res.sendFile(adminIndex) });
 }
 
@@ -101,12 +101,21 @@ function loadPlugins() {
     plugins.forEach(plugin => {
         const pluginPath = path.join(baseDirectory, plugin.path);
         const index = require(pluginPath);
+
+        console.log(chalk.green('> plugin path', pluginPath));
+
         if (index) {
             // TODO: wait if a promise is returned
             index();
         }
+        serveAssetsForPlugin.call(this, pluginPath);
         loadRoutesForPlugin.call(this, pluginPath);
     });
+}
+
+function serveAssetsForPlugin(pluginPath) {
+    console.log(chalk.green('> adding static dir to', path.join(pluginPath, 'assets')));
+    this.options.app.use(this.options.express.static(path.join(pluginPath, 'assets'), this.options.staticOptions));
 }
 
 function loadRoutesForPlugin(pluginPath) {

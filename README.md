@@ -12,7 +12,9 @@ Please use Node 6+
 
 Each SPA is called a Chapter.
 
-A Plugin is made up of multiple Pages. Pages are loaded into Plugins
+A Plugin is a feature.
+
+One type of feature is a SPA. In this case, a Plugin is made up of multiple Pages. Pages are loaded into Plugins
 dynamically. Going from one Plugin to another triggers a page refresh.
 Going from one Page to another within the same Plugin does not trigger
 a page refresh. 
@@ -114,8 +116,13 @@ Grasshopper configuration object.
 
 ## Roadmap
 
+Should see what grexpo loaded in console and create an discovery endpoint
 What for plugin/index.js if it returns a promise.
 Make plugins.json optionally come from a db
 Include ways to use sass and jade with Polymer.
 Include ways to use jade on server side.
 Include migrations.
+
+SEO tags out of the box (OG, ....)
+TagManager
+Sitemap

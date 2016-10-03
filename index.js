@@ -76,6 +76,7 @@ function startGrasshopper() {
         .then(function(serviceResponse) {
             this.authenticatedRequest = serviceResponse.authenticatedRequest;
             this.grasshopper = serviceResponse.grasshopper;
+            // TODO: add on bridgetown and anything else useful
 
             grexpo.services.authenticatedRequest = this.authenticatedRequest;
             grexpo.services.grasshopper = this.grasshopper;
@@ -108,6 +109,7 @@ function loadPlugins() {
             // TODO: wait if a promise is returned
             index();
         }
+        // TODO: do not call these if there is no assets dir or routes.json
         serveAssetsForPlugin.call(this, pluginPath);
         loadRoutesForPlugin.call(this, pluginPath);
     });

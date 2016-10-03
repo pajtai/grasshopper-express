@@ -1,6 +1,6 @@
 {
   "name": "grexpo",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha.1",
   "description": "Grasshopper express polymer",
   "main": "index.js",
   "scripts": {

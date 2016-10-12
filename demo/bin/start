@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-(watchify -t vueify -e plugins/main/client/home/main.js -o plugins/main/assets/build.js)&
-NODE_ENV=local nodemon index.js
+(watchify -v -t vueify -e plugins/main/client/index.js -o plugins/main/assets/build.js)&
+NODE_ENV=local nodemon -V index.js

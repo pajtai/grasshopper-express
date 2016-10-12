@@ -1,6 +1,6 @@
 'use strict';
 
-const grexpo = require('../../../../../index');
+const grexpo = require('../../../../../../index');
 
 module.exports = function head(req, res, next) {
     res.locals.head = grexpo.services.authenticatedRequest.content

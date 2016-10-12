@@ -4,6 +4,8 @@
         ".git",
         ".idea",
         ".vagrant",
-        "node_modules"
+        "node_modules",
+        "*/*/client",
+        "build.js"
     ]
 }

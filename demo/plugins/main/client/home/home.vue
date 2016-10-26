@@ -1,13 +1,26 @@
 <style lang="scss">
-$green: #00FF00;
-.red {
-    color: $green;
+html, body {
+    min-height: 100%;
+}
+body {
+    background-color: #D0D1CB;
+    background-image: url("/images/bicycle.jpg");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    color:#030303;
+}
+.jumbotron {
+    background-color: transparent;
 }
 </style>
 
 <template lang="pug">
-div.stage
+.jumbotron
+    h1 Welcome
     my-counter
+    p
+        a.btn.btn-primary.btn-lg(role="button") Click here
 </template>
 
 <script>

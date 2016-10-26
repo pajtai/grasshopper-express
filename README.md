@@ -116,6 +116,9 @@ Grasshopper configuration object.
 
 ## Roadmap
 
+Use bootstrap or other as sass import
+Convert over to webpack
+Create dev and build webpacks
 Should see what grexpo loaded in console and create an discovery endpoint
 What for plugin/index.js if it returns a promise.
 Make plugins.json optionally come from a db
